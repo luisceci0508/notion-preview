@@ -1,4 +1,5 @@
-name = "notion-preview"
+# wrangler.toml
+name = 'preview'
 
 compatibility_date = "2026-09-11"
 
