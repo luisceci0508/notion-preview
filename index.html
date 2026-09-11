@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meu Preview de Links</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        min-height: 100vh;
+        padding: 40px;
+        font-family: Arial, Helvetica, sans-serif;
+        background: #191919;
+        color: #f5f5f5;
+    }
+
+    .pagina {
+        width: min(1100px, 100%);
+        margin: 0 auto;
+    }
+
+    .cabecalho {
+        margin-bottom: 28px;
+    }
+
+    .cabecalho h1 {
+        margin: 0 0 8px;
+        font-size: 32px;
+    }
+
+    .cabecalho p {
+        margin: 0;
+        color: #aaa;
+    }
+
+    .area {
+        display: grid;
+        grid-template-columns: 20fr 800px;
+        gap: 24px;
+        align-items: start;
+    }
+
+    .painel {
+        border: 1px solid #414141;
+        border-radius: 18px;
+        padding: 28px;
+        background: #202020;
+    }
+
+    .etiqueta {
+        display: inline-block;
+        padding: 8px 13px;
+        border-radius: 999px;
+        background: #45121d;
+        color: #ff3151;
+        font-size: 13px;
+        font-weight: bold;
+        margin-bottom: 18px;
+    }
+
+    .painel h2 {
+        margin: 0 0 10px;
+        font-size: 30px;
+        line-height: 1.05;
+    }
+
+    .descricao {
+        color: #aaa;
+        line-height: 1.55;
+        margin-bottom: 28px;
+    }
+
+    .campo-label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    .linha-input {
+        display: flex;
+        gap: 10px;
+    }
+
+    input {
+        flex: 1;
+        min-width: 0;
+        height: 50px;
+        padding: 0 14px;
+        border: 1px solid #4a4a4a;
+        border-radius: 10px;
+        background: #181818;
+        color: white;
+        font-size: 15px;
+        outline: none;
+    }
+
+    input:focus {
+        border-color: #777;
+    }
+
+    button {
+        border: 0;
+        border-radius: 10px;
+        padding: 0 18px;
+        min-height: 50px;
+        background: #ed0033;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    button:hover {
+        filter: brightness(1.12);
+    }
+
+    .dica {
+        color: #999;
+        font-size: 13px;
+        margin-top: 12px;
+    }
+
+    /* CARTÃO */
+    .janela {
+        border: 1px solid #464646;
+        border-radius: 16px;
+        overflow: hidden;
+        background: #202020;
+        box-shadow: 0 18px 45px rgba(0,0,0,.25);
+    }
+
+    .barra {
+        height: 42px;
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        padding: 0 14px;
+        border-bottom: 1px solid #444;
+    }
+
+    .bolinha {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+    }
+
+    .vermelha { background: #ff625f; }
+    .amarela { background: #ffc043; }
+    .verde { background: #59c95b; }
+
+    .conteudo-card {
+        padding: 16px;
+    }
+
+    .capa {
+        height: 180px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, #ef0035, #f04c69);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .icone-site {
+        width: 54px;
+        height: 54px;
+        border-radius: 50%;
+        background: white;
+        color: #e90035;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 26px;
+        font-weight: 900;
+    }
+
+    .nome-na-capa {
+        position: absolute;
+        left: 18px;
+        bottom: 16px;
+        font-size: 22px;
+        font-weight: 800;
+    }
+
+    .informacoes {
+        padding: 16px 0 0;
+    }
+
+    .dominio {
+        color: #aaa;
+        font-size: 13px;
+        margin-bottom: 8px;
+    }
+
+    .titulo-card {
+        font-size: 17px;
+        font-weight: 800;
+        margin-bottom: 10px;
+        line-height: 1.25;
+    }
+
+    .url-card {
+        color: #aaa;
+        font-size: 13px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        margin-bottom: 14px;
+    }
+
+    .acoes {
+        display: grid;
+        gap: 9px;
+    }
+
+    .botao-secundario {
+        background: #3b3b3b;
+    }
+
+    .mensagem {
+        margin-top: 18px;
+        padding: 13px;
+        border: 1px solid #414141;
+        border-radius: 10px;
+        color: #aaa;
+        font-size: 13px;
+        line-height: 1.45;
+    }
+
+    @media (max-width: 800px) {
+        body {
+            padding: 20px;
+        }
+
+        .area {
+            grid-template-columns: 1fr;
+        }
+
+        .linha-input {
+            flex-direction: column;
+        }
+
+        button {
+            width: 100%;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="pagina">
+
+    <header class="cabecalho">
+        <h1>Meu painel de links</h1>
+        <p>Adicione um link e veja uma prévia personalizada.</p>
+    </header>
+
+    <main class="area">
+
+        <section class="painel">
+            <span class="etiqueta">📌 Preview de link</span>
+
+            <h2>Insira um link e veja uma prévia.</h2>
+
+            <p class="descricao">
+                Este é o primeiro protótipo. Digite uma URL e o sistema
+                identifica automaticamente alguns sites conhecidos.
+            </p>
+
+            <label class="campo-label" for="link">Link</label>
+
+            <div class="linha-input">
+                <input
+                    id="link"
+                    type="url"
+                    placeholder="https://www.pinterest.com/..."
+                >
+
+                <button onclick="mostrarPrevia()">
+                    Mostrar prévia
+                </button>
+            </div>
+
+            <p class="dica">
+                Exemplos: Pinterest, YouTube, Instagram, Google Drive ou GitHub.
+            </p>
+
+            <div class="mensagem">
+                <strong>Como funciona?</strong><br>
+                Por enquanto, esta versão identifica o site e monta o cartão.
+                Na próxima etapa podemos fazer o sistema buscar automaticamente
+                título, imagem e descrição reais da página.
+            </div>
+        </section>
+
+
+        <section class="janela">
+
+            <div class="barra">
+                <span class="bolinha vermelha"></span>
+                <span class="bolinha amarela"></span>
+                <span class="bolinha verde"></span>
+            </div>
+
+            <div class="conteudo-card">
+
+                <div class="capa" id="capa">
+                    <div class="icone-site" id="icone">?</div>
+                    <div class="nome-na-capa" id="nomeCapa">
+                        Sua prévia
+                    </div>
+                </div>
+
+                <div class="informacoes">
+
+                    <div class="dominio" id="dominio">
+                        nenhum link
+                    </div>
+
+                    <div class="titulo-card" id="titulo">
+                        Insira um link ao lado
+                    </div>
+                    
+                    <div class="descricao-card" id="descricao">
+                        A descricao aparecerá aqui
+                    </div>
+                    <div class="url-card" id="url">
+                        A URL aparecerá aqui
+                    </div>
+
+                    <div class="acoes">
+                        <button onclick="abrirLink()">
+                            Abrir link
+                        </button>
+
+                        <button class="botao-secundario" onclick="copiarLink()">
+                            Copiar link
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+</div>
+
+
+<script>
+let linkAtual = "";
+
+function identificarSite(url) {
+    const host = new URL(url).hostname.replace("www.", "");
+
+    if (host.includes("pinterest")) {
+        return {
+            nome: "Pinterest",
+            icone: "P",
+            titulo: "Ideia salva no Pinterest"
+        };
+    }
+
+    if (host.includes("youtube") || host.includes("youtu.be")) {
+        return {
+            nome: "YouTube",
+            icone: "▶",
+            titulo: "Vídeo do YouTube"
+        };
+    }
+
+    if (host.includes("instagram")) {
+        return {
+            nome: "Instagram",
+            icone: "◎",
+            titulo: "Publicação do Instagram"
+        };
+    }
+
+    if (host.includes("drive.google")) {
+        return {
+            nome: "Google Drive",
+            icone: "D",
+            titulo: "Arquivo no Google Drive"
+        };
+    }
+
+    if (host.includes("github")) {
+        return {
+            nome: "GitHub",
+            icone: "G",
+            titulo: "Projeto no GitHub"
+        };
+    }
+
+    return {
+        nome: host,
+        icone: host.charAt(0).toUpperCase(),
+        titulo: "Página da web"
+    };
+}
+document.getElementById("link").addEventListener("keydown", function(event){
+    if (event.key === "Enter"){
+        mostrarPrevia();
+    }
+});
+async function buscarDadosDolink(url) {
+
+    const resposta = await fetch(
+        "https://preview-link.luisceci0508.workers.dev/?url=" +
+        encodeURIComponent(url)
+    );
+
+    if (!resposta.ok) {
+        throw new Error("Não foi possível acessar o link.");
+    }
+
+    const html = await resposta.text();
+
+    const documento = new DOMParser().parseFromString(
+        html,
+        "text/html"
+    );
+
+    const titulo =
+        documento.querySelector('meta[property="og:title"]')?.content ||
+        documento.querySelector("title")?.textContent ||
+        "Página da web";
+
+    const descricao =
+        documento.querySelector('meta[property="og:description"]')?.content ||
+        documento.querySelector('meta[name="description"]')?.content ||
+        "Sem descrição disponível.";
+
+    const imagem =
+        documento.querySelector('meta[property="og:image"]')?.content ||
+        "";
+
+    const dominio = new URL(url).hostname.replace("www.", "");
+
+    return {
+        titulo: titulo,
+        descricao: descricao,
+        imagem: imagem,
+        dominio: dominio
+    };
+}
+async function mostrarPrevia() {
+    const campo = document.getElementById("link");
+    let url = campo.value.trim();
+
+    if (!url) {
+        alert("Digite um link primeiro.");
+        return;
+    }
+
+    if (!url.startsWith("http://") && !url.startsWith("https://")) {
+        url = "https://" + url;
+    }
+
+    try {
+        const dados = identificarSite(url);
+
+        const dadosReais = await buscarDadosDolink(url);
+
+        linkAtual = url;
+
+        document.getElementById("icone").textContent = dados.icone;
+        document.getElementById("nomeCapa").textContent = dados.nome;
+
+        document.getElementById("dominio").textContent =
+            dadosReais.dominio;
+
+        document.getElementById("titulo").textContent =
+            dadosReais.titulo;
+
+        document.getElementById("descricao").textContent =
+            dadosReais.descricao;
+
+        document.getElementById("url").textContent =
+            url;
+
+
+        // Reseta a capa antes de carregar uma nova imagem
+        const capa = document.getElementById("capa");
+        const icone = document.getElementById("icone");
+
+        capa.style.backgroundImage = "";
+        icone.style.display = "flex";
+
+
+        // Se existir uma imagem, coloca ela na capa
+        if (dadosReais.imagem) {
+
+            capa.style.backgroundImage =
+                `url("${dadosReais.imagem}")`;
+
+            capa.style.backgroundSize = "cover";
+            capa.style.backgroundPosition = "center";
+
+            icone.style.display = "none";
+        }
+
+    } catch (erro) {
+
+        console.error(erro);
+
+        alert(
+            "NÃO FOI POSSÍVEL BUSCAR AS INFORMAÇÕES DESSE LINK."
+        );
+    }
+}
+
+
+function abrirLink() {
+    if (!linkAtual) {
+        alert("Primeiro gere uma prévia.");
+        return;
+    }
+
+    window.open(linkAtual, "_blank");
+}
+
+async function copiarLink() {
+    if (!linkAtual) {
+        alert("Primeiro gere uma prévia.");
+        return;
+    }
+
+    try {
+        await navigator.clipboard.writeText(linkAtual);
+        alert("Link copiado!");
+    } catch (erro) {
+        alert("Não foi possível copiar automaticamente.");
+    }
+}
+</script>
+
+</body>
+</html>
