@@ -459,7 +459,6 @@ async function buscarDadosDolink(url) {
     };
 }
 async function mostrarPrevia() {
-   alert("funfou"); 
    const campo = document.getElementById("link");
     let url = campo.value.trim();
 
@@ -478,7 +477,7 @@ async function mostrarPrevia() {
         const dadosReais = await buscarDadosDolink(url);
 
         linkAtual = url;
-        localStorage.setIte("linkSalvo", url);
+        localStorage.setItem("linkSalvo", url);
         document.getElementById("icone).tectContent = dados.icone;
 
         document.getElementById("icone").textContent = dados.icone;
