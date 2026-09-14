@@ -163,7 +163,7 @@
         height: 200px;
         border-radius: 12px;
         background: linear-gradient(135deg, #ef0035, #f04c69);
-        display: center;
+        display: flex;
         align-items: center;
         justify-content: center;
         position: relative;
@@ -481,7 +481,6 @@ async function mostrarPrevia() {
         localStorage.setItem("linkSalvo", url);
         document.getElementById("icone").textContent = dados.icone;
 
-        document.getElementById("icone").textContent = dados.icone;
         document.getElementById("nomeCapa").textContent = dados.nome;
 
         document.getElementById("dominio").textContent =
