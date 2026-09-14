@@ -553,6 +553,18 @@ async function copiarLink() {
         alert("Não foi possível copiar automaticamente.");
     }
 }
+
+function trocarLink() {
+    const novoLink = prompt("Digite o novo link:");
+
+    if (!novoLink) {
+        return;
+    }
+
+    document.getElementById("link").value = novoLink;
+
+    mostrarPrevia();
+}
    
 window.addEventListener("load", function () {
    const linkSalvo = localStorage.getItem("linkSalvo");
