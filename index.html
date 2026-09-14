@@ -468,7 +468,7 @@ async function mostrarPrevia() {
     }
 
     if (!url.startsWith("http://") && !url.startsWith("https://")) {
-        url = "https://" + url;
+        url = "https://" + url; 
     }
 
     try {
@@ -477,6 +477,8 @@ async function mostrarPrevia() {
         const dadosReais = await buscarDadosDolink(url);
 
         linkAtual = url;
+        localStorage.setIte("linkSalvo", url);
+        document.getElementById("icone).tectContent = dados.icone;
 
         document.getElementById("icone").textContent = dados.icone;
         document.getElementById("nomeCapa").textContent = dados.nome;
@@ -547,6 +549,13 @@ async function copiarLink() {
         alert("Não foi possível copiar automaticamente.");
     }
 }
+window.addEventListener("load", function () {
+   const linkSalvo = localStorage.getItem("linkSalvo");
+
+   if (linkSalvo) {
+      document.getElementById("link").value = linkSalvo;
+   }
+});
 </script>
 
 </body>
