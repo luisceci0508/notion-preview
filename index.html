@@ -576,14 +576,12 @@ async function copiarLink() {
 
 function trocarLink() {
     const novoLink = prompt("Digite o novo link:");
+    document.getElementById("campoTroca").style.display = "flex";
+}
 
-    if (!novoLink) {
-        return;
-    }
-
-    document.getElementById("link").value = novoLink;
-
-    mostrarPrevia();
+function inserirLink() {
+    const novoLink = prompt("Digite o novo link:");
+    document.getElementById("campoTroca").style.display = "flex";
 }
    
 window.addEventListener("load", function () {
