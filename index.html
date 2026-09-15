@@ -373,7 +373,7 @@
                           type="url"
                           placeholder="Cole o novo link aqui"
                         >
-                       <button onclivk="confirmarTroca()">
+                       <button onclick="confirmarTroca()">
                           Atualizar
                        </button>
                     </div>
@@ -575,17 +575,15 @@ async function copiarLink() {
 }
 
 function trocarLink() {
-    const novoLink = prompt("Digite o novo link:");
     document.getElementById("campoTroca").style.display = "flex";
 }
 
 function inserirLink() {
-    const novoLink = prompt("Digite o novo link:");
     document.getElementById("campoTroca").style.display = "flex";
 }
 
 function confirmarTroca() {
-    const novoLink = document.getElementById("novoLink").valeu.trim();
+    const novoLink = document.getElementById("novoLink").value.trim();
 
     if (!novoLink){
         alert("Digite um link primeiro.");
